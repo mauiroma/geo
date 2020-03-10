@@ -1,0 +1,61 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: '2020-03-04T00:01:25Z'
+  labels:
+    app: acme-helloworld
+  name: acme-helloworld
+  namespace: newsletter-d3js
+  resourceVersion: '43097114'
+  selfLink: >-
+    /apis/build.openshift.io/v1/namespaces/newsletter-d3js/buildconfigs/acme-helloworld
+  uid: 4a8c2cb4-5dab-11ea-9c41-005056831e99
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'acme-helloworld:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: 'http://gitlab.rete.poste/SFORZAPI/newsletter.git'
+    type: Git
+  strategy:
+    dockerStrategy:
+      env:
+        - name: HTTPS_PROXY
+          value: 'http://10.70.120.49:3128'
+        - name: HTTP_PROXY
+          value: 'http://10.70.120.49:3128'
+        - name: NO_PROXY
+          value: >-
+            .svc,.svc.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,.testposte,.ocprm.local,.postecom.local,.poste,172.30.0.1
+        - name: http_proxy
+          value: 'http://10.70.120.49:3128'
+        - name: https_proxy
+          value: 'http://10.70.120.49:3128'
+        - name: no_proxy
+          value: >-
+            .svc,.svc.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,.testposte,.ocprm.local,.postecom.local,.poste,172.30.0.1
+      from:
+        kind: DockerImage
+        name: 'sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest'
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    - github:
+        secret: WLqM0-zGGvoGWzN6vFNE
+      type: GitHub
+    - generic:
+        secret: rgUVgHmyUTXviWeXa_2z
+      type: Generic
+    - type: ConfigChange
+status:
+  lastVersion: 6
+

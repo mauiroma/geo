@@ -1,0 +1,99 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: 2020-03-04T00:01:25Z
+  generation: 5
+  labels:
+    app: acme-helloworld
+  name: acme-helloworld
+  namespace: newsletter-d3js
+  resourceVersion: "43097438"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/newsletter-d3js/deploymentconfigs/acme-helloworld
+  uid: 4a902548-5dab-11ea-9c41-005056831e99
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: acme-helloworld
+    deploymentconfig: acme-helloworld
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: acme-helloworld
+        deploymentconfig: acme-helloworld
+    spec:
+      containers:
+      - env:
+        - name: MY_SERVER_PORT
+          value: "8080"
+        image: docker-registry.default.svc:5000/newsletter-d3js/acme-helloworld@sha256:5b025d497ca66dd7aea604c49e965721c462eb86b44495b70087d42c465c024e
+        imagePullPolicy: Always
+        name: acme-helloworld
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - acme-helloworld
+      from:
+        kind: ImageStreamTag
+        name: acme-helloworld:latest
+        namespace: newsletter-d3js
+      lastTriggeredImage: docker-registry.default.svc:5000/newsletter-d3js/acme-helloworld@sha256:5b025d497ca66dd7aea604c49e965721c462eb86b44495b70087d42c465c024e
+    type: ImageChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2020-03-04T00:04:43Z
+    lastUpdateTime: 2020-03-04T00:04:43Z
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: 2020-03-04T00:22:10Z
+    lastUpdateTime: 2020-03-04T00:22:13Z
+    message: replication controller "acme-helloworld-4" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - imageTrigger:
+        from:
+          kind: DockerImage
+          name: docker-registry.default.svc:5000/newsletter-d3js/acme-helloworld@sha256:5b025d497ca66dd7aea604c49e965721c462eb86b44495b70087d42c465c024e
+      type: ImageChange
+    message: image change
+  latestVersion: 4
+  observedGeneration: 5
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1
+

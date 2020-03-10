@@ -1,0 +1,14 @@
+{
+  "name": "serverRand",
+  "version": "0.0.1",
+  "description": "websocket-play! This server run emit WS messages simulating an Sales event gateway",
+  "dependencies": {
+    "express": "4.10.2",
+    "socket.io": "1.2.0"
+  },
+  "scripts": {
+    "start": "node serverRand.js"
+  },
+  "license": "MIT",
+  "main": "serverRand.js"
+}
