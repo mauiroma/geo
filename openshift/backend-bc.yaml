@@ -19,7 +19,7 @@ spec:
     contextDir: src/geo-ws-rand/
     git:
       ref: master
-      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git'
+      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git.git'
     type: Git
   strategy:
     sourceStrategy:

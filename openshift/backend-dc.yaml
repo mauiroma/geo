@@ -30,7 +30,7 @@ spec:
         deploymentconfig: backend
     spec:
       containers:
-              - image: docker-registry.default.svc:5000/demo1-jenkins-app-a/backend:latest
+      - image: docker-registry.default.svc:5000/demo1-jenkins-app-a/backend:latest
         imagePullPolicy: Always
         name: backend
         ports:
