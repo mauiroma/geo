@@ -2,15 +2,16 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   annotations:
+  generation: 2
   labels:
-    app: frontend-data-platform-patterns
-  name: frontend-data-platform-patterns
+    app: backend
+  name: backend
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
-    app: frontend-data-platform-patterns
-    deploymentconfig: frontend-data-platform-patterns
+    app: backend
+    deploymentconfig: backend
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -25,19 +26,15 @@ spec:
     metadata:
       annotations:
       labels:
-        app: frontend-data-platform-patterns
-        deploymentconfig: frontend-data-platform-patterns
+        app: backend
+        deploymentconfig: backend
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/data-plaform-cqrs/frontend-data-platform-patterns:latest
+              - image: docker-registry.default.svc:5000/demo1-jenkins-app-a/backend:latest
         imagePullPolicy: Always
-        name: frontend-data-platform-patterns
+        name: backend
         ports:
         - containerPort: 8080
-          protocol: TCP
-        - containerPort: 8443
-          protocol: TCP
-        - containerPort: 8778
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
@@ -53,9 +50,8 @@ spec:
   - imageChangeParams:
       automatic: true
       containerNames:
-      - frontend-data-platform-patterns
+      - backend
       from:
         kind: ImageStreamTag
-        name: frontend-data-platform-patterns:latest
-        namespace: data-plaform-cqrs
+        name: backend:latest
     type: ImageChange
