@@ -37,7 +37,8 @@ io.on('connection', function(socket){
 
 function createSaleMsg() {
   var countryCode  = Math.round(Math.random() * 0x64);
-  var countryColor = process.env.MY_COUNTRY_COLOR || "#f00"; // Country in red! 
+    var countryColor = process.env.MY_COUNTRY_COLOR || "#F4D03F"; // Country in yellow! 
+  //var countryColor = process.env.MY_COUNTRY_COLOR || "#f00"; // Country in red! 
   //var countryColor = process.env.MY_COUNTRY_COLOR || "#ffc300"; // Country in orange!
   var delay        = Math.round((Math.random() * 2) + 2)*1000;
   var saleValue    = Math.round((Math.random() * 1000) + 1);
