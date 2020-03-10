@@ -18,7 +18,7 @@ spec:
   source:
     contextDir: src/geo-portal/
     git:
-      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git.git'
+      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git'
       ref: master
     type: Git
   strategy:
