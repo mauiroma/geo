@@ -1,5 +1,5 @@
-#FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
-FROM node:8.6
+FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
+#FROM node:8.6
 
 USER root
 WORKDIR /src
