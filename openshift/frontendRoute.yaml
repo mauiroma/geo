@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: frontend-data-platform-patterns
+  name: frontend-data-platform-patterns
+spec:
+  host: frontend-data-platform-patterns-data-plaform-cqrs.app.svil2.ocprm.testposte
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: frontend-data-platform-patterns
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,61 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+  labels:
+    app: frontend-data-platform-patterns
+  name: frontend-data-platform-patterns
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: frontend-data-platform-patterns
+    deploymentconfig: frontend-data-platform-patterns
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: frontend-data-platform-patterns
+        deploymentconfig: frontend-data-platform-patterns
+    spec:
+      containers:
+      - image: docker-registry.default.svc:5000/data-plaform-cqrs/frontend-data-platform-patterns:latest
+        imagePullPolicy: Always
+        name: frontend-data-platform-patterns
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - frontend-data-platform-patterns
+      from:
+        kind: ImageStreamTag
+        name: frontend-data-platform-patterns:latest
+        namespace: data-plaform-cqrs
+    type: ImageChange
