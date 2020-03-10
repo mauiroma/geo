@@ -49,9 +49,9 @@
 		// Lets define some globals var
 		const globe_width = 480;
 		const globe_height = 480;
-		//var def_ws_uri = "ws://backend-demo-a.app.svil2.ocprm.testposte:443/ws"; // Default web socket emitter URI
-		//var def_ws_uri = "ws://backend-demo-a.app.svil2.ocprm.testposte:443"; // Default web socket emitter URI
-		var def_ws_uri = "wss://backend-demo-a.app.svil2.ocprm.testposte:443"; // Default web socket emitter URI
+		//var def_ws_uri = "ws://portal.yoox.novalocal:80/ws"; // Default web socket emitter URI
+		//var def_ws_uri = "ws://wsrand.yoox.novalocal:80"; // Default web socket emitter URI
+		var def_ws_uri = "wss://yoox-geo-ws-rand-newsletter-d3js.app.svil2.ocprm.testposte:443"; // Default web socket emitter URI
 	</script>
 	
 		<script src="//d3js.org/d3.v3.min.js"></script>
@@ -69,7 +69,7 @@
 		  transition(manualCC.value);
 		  console.log("Country is: " + countries[cc].name )
 		}
-	  </script>
+	</script>
 	</div>
 	<div id="section_debug">
 		<input id="hide_ws_connection" type="button" value="connection"
@@ -112,7 +112,7 @@
 		</div>
 	</div>
 
-	<script type='text/javascript'>
+<script type='text/javascript'>
 
 	// websocket handling script
     "use strict";
@@ -134,7 +134,7 @@
       var message = document.getElementById("message");
       var socket;
       var connectionRequest;
-
+      
       open.disabled = false;
       close.disabled = true;
       send.disabled = true;
@@ -232,10 +232,9 @@
       send.addEventListener("click", function(event) {
       });
     });
+</script>
 
-
-  </script>
-	<script>
+<script>
       
       var  tblBody = "";
       var  tblHead = "<thead><th>Rank</th><th>Country</th><th>Tot sales</th></thead>";
@@ -255,10 +254,9 @@
         tblBody = "<tbody>" + tblBody + "</tbody>"
         document.getElementById("mytable").innerHTML = tblHead + tblBody;
       }
-    </script>
+</script>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
   // Unhyde element
     function toggle_visibility(id) {
         var e = document.getElementById(id);

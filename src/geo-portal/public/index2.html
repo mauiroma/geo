@@ -1,0 +1,397 @@
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/reset.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/bootstrap-2.3.2.min.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/application.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/project.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/share.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/dynatable-docs.css">
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/jquery.dynatable.css">
+
+<div class="dynatable-demo">
+  <div id="dynatable-processing-ul-example" class="dynatable-processing" style="position: absolute; top: 18571px; left: 347.75px; width: 930px; height: 446px; display: none;"><span style="position: relative; top: 212.953px; left: 424.5px;">Processing...</span></div>
+  <ul id="ul-example" class="row-fluid">
+    <li class="span4 first">
+      <div class="thumbnail">
+        <div class="thumbnail-image">
+          <img src="https://s3.amazonaws.com/dynatable-docs-assets/images/dinosaurs/Stegosaurus_BW.jpg">
+        </div>
+        <div class="caption">
+          <h3>Stegosaurus armatus</h3>
+          <p>State: Colorado</p>
+          <p>Year: 1984</p>
+          <p><a target="_blank" href="http://en.wikipedia.org/wiki/Stegosaurus" class="btn btn-primary">View</a> <a
+              href="#" class="btn">Action</a></p>
+        </div>
+      </div>
+    </li>
+    <li class="span4">
+      <div class="thumbnail">
+        <div class="thumbnail-image">
+          <img src="https://s3.amazonaws.com/dynatable-docs-assets/images/dinosaurs/300px-Astrodon1DB.jpg">
+        </div>
+        <div class="caption">
+          <h3>Astrodon johnstoni</h3>
+          <p>State: Maryland</p>
+          <p>Year: 1998</p>
+          <p><a target="_blank" href="http://en.wikipedia.org/wiki/Astrodon_johnstoni" class="btn btn-primary">View</a>
+            <a href="#" class="btn">Action</a></p>
+        </div>
+      </div>
+    </li>
+    <li class="span4">
+      <div class="thumbnail">
+        <div class="thumbnail-image">
+          <img
+            src="https://s3.amazonaws.com/dynatable-docs-assets/images/dinosaurs/300px-Hypsibema_missouriensis_Bollinger_County_Museum_of_Natural_History.jpg">
+        </div>
+        <div class="caption">
+          <h3>Hypsibema missouriensis</h3>
+          <p>State: Missouri</p>
+          <p>Year: 2004</p>
+          <p><a target="_blank" href="http://en.wikipedia.org/wiki/Hypsibema_missouriensis"
+              class="btn btn-primary">View</a> <a href="#" class="btn">Action</a></p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="https://s3.amazonaws.com/dynatable-docs-assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.scrollTo.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.toc.min.js"></script>
+<script type="text/javascript"
+  src="https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.sharrre-1.2.0.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/dynatable-docs-assets/js/jquery.dynatable.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/dynatable-docs-assets/js/highcharts.js"></script>
+
+
+<script type="text/javascript">
+  $('#example-table').dynatable({
+    features: {
+      pushState: true
+    },
+    readers: {
+      'rank': function (el, record) {
+        return Number(el.innerHTML) || 0;
+      },
+      'us-$': function (el, record) {
+        return Number(el.innerHTML.replace(/,/g, ''));
+      }
+    },
+    writers: {
+      'rank': function (record) {
+        return record['rank'] ? record['rank'].toString() : '-';
+      },
+      'us-$': function (record) {
+        return record['us-$'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    }
+  });
+</script>
+
+<script>
+  (function () {
+    var $container = $('#text-transform-example-container'),
+      origTableHtml = $container.html();
+
+    $(document).delegate('#text-transform-button', 'click', function (e) {
+      e.preventDefault();
+      $container.html(origTableHtml);
+
+      // Ahhhh, difficult... to... type... this...
+      eval($('#text-transform-function').html());
+
+      var dynatable = $('#text-transform-example').data('dynatable');
+      $('#text-transform-result').html(JSON.stringify(dynatable.settings.dataset.records, null, 2));
+    });
+  })();
+</script>
+
+
+
+<script>
+  $('#my-ajax-table').dynatable({
+    features: {
+      paginate: false,
+      sort: false,
+      search: false,
+      perPageSelect: false
+    },
+    dataset: {
+      ajax: true,
+      ajaxUrl: '/dynatable-ajax.json',
+      ajaxOnLoad: true,
+      records: []
+    }
+  });
+</script>
+<script>
+  $('#sorting-example').dynatable({
+    features: {
+      paginate: false,
+      search: false,
+      recordCount: false
+    },
+    dataset: {
+      sorts: { year: 1 }
+    },
+    readers: {
+      'price': function (el, record) {
+        return Number(el.innerHTML.replace(/,/g, ''));
+      }
+    },
+    writers: {
+      'price': function (record) {
+        return record.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    }
+  });
+</script>
+<script>
+  (function () {
+    function getAverageRGB(imgEl) {
+
+      var blockSize = 5, // only visit every 5 pixels
+        defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
+        canvas = document.createElement('canvas'),
+        context = canvas.getContext && canvas.getContext('2d'),
+        data, width, height,
+        i = -4,
+        length,
+        rgb = { r: 0, g: 0, b: 0 },
+        count = 0;
+
+      if (!context) {
+        return defaultRGB;
+      }
+
+      height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+      width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+      context.drawImage(imgEl, 0, 0);
+
+      try {
+        data = context.getImageData(0, 0, width, height);
+      } catch (e) {
+        /* security error, img on diff domain */
+        return defaultRGB;
+      }
+
+      length = data.data.length;
+
+      while ((i += blockSize * 4) < length) {
+        // Ignore grayish values
+        if (Math.abs(data.data[i] - data.data[i + 1]) > 25 && Math.abs(data.data[i + 1] - data.data[i + 3]) > 25) {
+          ++count;
+          rgb.r += data.data[i];
+          rgb.g += data.data[i + 1];
+          rgb.b += data.data[i + 2];
+        }
+      }
+
+      // ~~ used to floor values
+      rgb.r = ~~(rgb.r / count);
+      rgb.g = ~~(rgb.g / count);
+      rgb.b = ~~(rgb.b / count);
+
+      return rgb;
+
+    }
+
+    $(window).load(function () {
+      $('#sorting-function-example')
+        .dynatable({
+          features: {
+            paginate: false,
+            search: false,
+            recordCount: false
+          },
+          readers: {
+            color: function (cell, record) {
+              var $cell = $(cell),
+                rgb = getAverageRGB($cell.find('img').get(0)),
+                dec = (rgb.r << 16) + (rgb.g << 8) + rgb.b;
+              record['dec'] = dec;
+              record['name'] = $cell.text();
+              return $cell.html();
+            }
+          }
+        });
+    })
+  })();
+</script>
+<script>
+  (function () {
+    $('#sorting-function-example').bind('dynatable:init', function (e, dynatable) {
+
+      $('#sorting-function-example-button').click(function (e) {
+        // Clear any existing sorts
+        dynatable.sorts.clear();
+        dynatable.sorts.add('name', 1) // 1=ASCENDING, -1=DESCENDING
+        dynatable.process();
+        e.preventDefault();
+      });
+
+      $('#sorting-function-example-clear-button').click(function (e) {
+        dynatable.sorts.clear();
+        dynatable.process();
+        e.preventDefault()
+      });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var dynatable = $('#search-example').dynatable({
+      features: {
+        paginate: false,
+        recordCount: false,
+        sorting: false
+      }
+    }).data('dynatable');
+
+    $('#search-year').change(function () {
+      var value = $(this).val();
+      if (value === "") {
+        dynatable.queries.remove("year");
+      } else {
+        dynatable.queries.add("year", value);
+      }
+      dynatable.process();
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    $('#search-function-example')
+      .bind('dynatable:init', function (e, dynatable) {
+        dynatable.queries.functions['max-price'] = function (record, queryValue) {
+          return parseFloat(record.price.replace(/,/, '')) <= parseFloat(queryValue);
+        };
+      })
+      .dynatable({
+        features: {
+          paginate: false,
+          recordCount: false,
+          sorting: false,
+          search: false
+        },
+        inputs: {
+          queries: $('#max-price')
+        }
+      });
+  })();
+</script>
+<script>
+  (function () {
+    $('#processing-indicator-example')
+      .bind('dynatable:init', function (e, dynatable) {
+        dynatable.sorts.functions['long-sort'] = function (a, b, attr, ascending) {
+          for (var i = 0; i < 10000; i++) {
+            // Woo!
+          }
+          return dynatable.sorts.functions.string(a, b, attr, ascending);
+        };
+      })
+      .dynatable({
+        features: {
+          paginate: false,
+          search: false,
+          recordCount: false,
+          pushState: false
+        },
+        dataset: {
+          sortTypes: {
+            importantThings: 'long-sort'
+          }
+        }
+      });
+  })();
+</script>
+
+<script>
+  (function () {
+    var dynatable = $('#processing-indicator-example').data('dynatable');
+    $('#processing-indicator-example-button').click(function (e) {
+      dynatable.processingIndicator.show();
+      setTimeout(function () {
+        dynatable.processingIndicator.hide();
+      }, 3000);
+      e.preventDefault();
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    $('#processing-indicator-nice-example').dynatable({
+      features: {
+        paginate: false,
+        search: false,
+        recordCount: false,
+        pushState: false,
+        sort: false
+      },
+      inputs: {
+        processingText: 'Loading <img src="https://s3.amazonaws.com/dynatable-docs-assets/images/loading.gif" />'
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var dynatable = $('#processing-indicator-nice-example').data('dynatable');
+    $('#processing-indicator-nice-example-button').click(function (e) {
+      dynatable.processingIndicator.hide();
+      dynatable.processingIndicator.show();
+      setTimeout(function () {
+        dynatable.processingIndicator.hide();
+      }, 3000);
+      e.preventDefault();
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    // Function that renders the list items from our records
+    function ulWriter(rowIndex, record, columns, cellWriter) {
+      var cssClass = "span4", li;
+      if (rowIndex % 3 === 0) { cssClass += ' first'; }
+      li = '<li class="' + cssClass + '"><div class="thumbnail"><div class="thumbnail-image">' + record.thumbnail + '</div><div class="caption">' + record.caption + '</div></div></li>';
+      return li;
+    }
+
+    // Function that creates our records from the DOM when the page is loaded
+    function ulReader(index, li, record) {
+      var $li = $(li),
+        $caption = $li.find('.caption');
+      record.thumbnail = $li.find('.thumbnail-image').html();
+      record.caption = $caption.html();
+      record.label = $caption.find('h3').text();
+      record.description = $caption.find('p').text();
+      record.color = $li.data('color');
+    }
+
+    $('#ul-example').dynatable({
+      table: {
+        bodyRowSelector: 'li'
+      },
+      dataset: {
+        perPageDefault: 3,
+        perPageOptions: [3, 6]
+      },
+      writers: {
+        _rowWriter: ulWriter
+      },
+      readers: {
+        _rowReader: ulReader
+      },
+      params: {
+        records: 'dinosaurs'
+      }
+    });
+  })();
+</script>
