@@ -18,8 +18,8 @@ spec:
   source:
     contextDir: src/geo-portal/
     git:
-      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git'
-      ref: master
+      uri: 'https://github.com/mauiroma/geo.git'
+      ref: dev
     type: Git
   strategy:
     dockerStrategy:
