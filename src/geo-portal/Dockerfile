@@ -1,4 +1,6 @@
-FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
+#FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
+FROM docker-registry.default.svc:5000/openshift/ubi:latest
+
 USER root
 WORKDIR /newsletter
 #COPY ./edit.html edit.html
