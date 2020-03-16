@@ -1,5 +1,5 @@
 #FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
-FROM docker-registry.default.svc:5000/openshift/ubi:latest
+FROM registry.access.redhat.com/ubi7/ubi:latest
 
 USER root
 WORKDIR /newsletter
