@@ -31,8 +31,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: BACKEND_URL
-          value: "wss://backend-demo-app1.apps.rhpds3x.openshift.opentlc.com"
         - name: MY_SERVER_PORT
           value: "8080"
           image: frontend:latest
