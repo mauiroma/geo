@@ -72,8 +72,10 @@
     <script>def target_cluster_flags = &quot;&quot;
 
 pipeline {
-	agent any
-	
+	agent {
+        	label 'slave'
+    	}
+	    
 	parameters {                
 		string(name: &apos;GIT_REPO&apos;, description: &apos;REpository GIT&apos;, defaultValue: &quot;https://github.com/mauiroma/geo.git&quot;)
 		string(name: &apos;GIT_BRANCH&apos;, description: &apos;GIT Branch&apos;, defaultValue: &quot;dev&quot;)
