@@ -1,4 +1,4 @@
-FROM sdpsvalmbf.rete.testposte:5000/openshift/ubi:latest
+FROM openshift/ubi:latest
 USER root
 WORKDIR /newsletter
 #COPY ./edit.html edit.html
