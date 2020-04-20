@@ -19,7 +19,7 @@ spec:
     contextDir: src/geo-ws-rand/
     git:
       ref: master
-      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git.git'
+      uri: 'https://github.com/mauiroma/geo.git'
     type: Git
   strategy:
     sourceStrategy:
@@ -30,14 +30,4 @@ spec:
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-    - github:
-        secret: X-bqiX1YBgbRpElL9tRJ
-      type: GitHub
-    - generic:
-        secret: S4O4JJelZCqcZu06sqvf
-      type: Generic
     - type: ConfigChange
-    - imageChange:
-        lastTriggeredImageID: >-
-          docker-registry.default.svc:5000/openshift/nodejs@sha256:74a3ef2964efc03dfc239da3f09691b720ce54ff4bb47588864adb222133f0fc
-      type: ImageChange
