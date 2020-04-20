@@ -18,33 +18,11 @@ spec:
   source:
     contextDir: src/geo-portal/
     git:
-      uri: 'http://gitlab.rete.poste/SFORZAPI/demo1-jenkins-app-a.git'
+      uri: 'https://github.com/mauiroma/geo.git'
       ref: master
     type: Git
   strategy:
-    dockerStrategy:
-      env:
-        - name: HTTPS_PROXY
-          value: 'http://10.70.120.49:3128'
-        - name: HTTP_PROXY
-          value: 'http://10.70.120.49:3128'
-        - name: NO_PROXY
-          value: >-
-            .svc,.svc.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,.testposte,.ocprm.local,.postecom.local,.poste,172.30.0.1
-        - name: http_proxy
-          value: 'http://10.70.120.49:3128'
-        - name: https_proxy
-          value: 'http://10.70.120.49:3128'
-        - name: no_proxy
-          value: >-
-            .svc,.svc.cluster.local,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,.testposte,.ocprm.local,.postecom.local,.poste,172.30.0.1
     type: Docker
   successfulBuildsHistoryLimit: 5
   triggers:
-    - github:
-        secret: WLqM0-zGGvoGWzN6vFNE
-      type: GitHub
-    - generic:
-        secret: rgUVgHmyUTXviWeXa_2z
-      type: Generic
     - type: ConfigChange
